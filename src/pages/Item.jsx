@@ -1,15 +1,15 @@
-import React from 'react'
-import { useProductsById } from '../hooks/useProductsById'
-import { useParams } from 'react-router-dom';
-import ItemDetailContainerComponent from '../Components/ItemDetailContainerComponent/ItemDetailContainerComponent';
-ItemDetailContainerComponent
+import React from "react";
+import { useProductById } from "../hooks/useProductById";
+import { useParams } from "react-router-dom";
+import LoaderComponent from "../Components/LoaderComponent/LoaderComponent";
+import ItemDetailContainer from "../Components/ItemDetailContainer/ItemDetailContainer";
+
 
 const Item = () => {
-  const {id} = useParams();
-  const {product} = useProductsById(id);
-  return (
-    <ItemDetailContainerComponent product={product}/>
-  )
-}
+  const { id } = useParams();
+  const { product, loading } = useProductById(id);
 
-export default Item
+  return loading ? <LoaderComponent /> : <ItemDetailContainer product={product} />;
+};
+
+export default Item; 

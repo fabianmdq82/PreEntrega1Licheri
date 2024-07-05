@@ -1,14 +1,18 @@
-import React from 'react'
-import ItemListContainerComponent from '../Components/ItemListContainerComponent/ItemListContainerComponent'
-import { useProducts } from '../hooks/useProducts';
+import React from "react";
+
+import { useCollectionItems } from "../hooks/useCollectionItems";
+
+import ItemListContainerComponent from "../Components/ItemListContainerComponent/ItemListContainerComponent";
+import LoaderComponent from "../Components/LoaderComponent/LoaderComponent";
 
 const Home = () => {
-  const {products} = useProducts();
-  return (
-    <>
-      <ItemListContainerComponent products={products}/>
-    </>
-  )
-}
+  const { items, loading } = useCollectionItems("products");
 
-export default Home
+  return loading ? (
+    <LoaderComponent />
+  ) : (
+    <ItemListContainerComponent products={items} />
+  );
+};
+
+export default Home;
